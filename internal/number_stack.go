@@ -7,7 +7,7 @@ import (
 
 type NumberStack interface {
 	Push(value float64)
-	Pop() float64
+	Pop() (float64, error)
 }
 
 type NumberStackImpl struct {
