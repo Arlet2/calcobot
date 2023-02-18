@@ -1,60 +1,51 @@
 package internal
 
-import (
-	"errors"
-)
-
 var AllowedOperations = OperationDictImpl{
 	[]operation{
-		{'(', 0},
-		{'+', 1},
-		{'-', 1},
-		{'*', 2},
-		{'/', 2},
-		{'~', 4}, // унарный минус
+		{'(', 0, false, nil},
+		{'+', 1, true, add},
+		{'-', 1, true, sub},
+		{'*', 2, true, mul},
+		{'/', 2, true, div},
+		{'^', 3, true, pow},
+		{'~', 4, false, unaryMinus}, // унарный минус
 	},
 }
 
 type operation struct {
 	symbol rune
 	priority int
+	isBinary bool
+	calc func (a float64, b float64) float64
 }
 
-type OperationDict interface {
-	IsOnDict(symbol rune) bool
-	GetPriority(symbol rune) (int, error)
-	GetOperation(symbol rune) (operation, error)
+func add(a float64, b float64) float64 {
+	return a+b
 }
 
-type OperationDictImpl struct{
-	operations []operation
+func sub(a float64, b float64) float64 {
+	return a-b
 }
 
-func (dict OperationDictImpl) IsOnDict(symbol rune) bool {
-	for _, value := range dict.operations {
-		if value.symbol == symbol {
-			return true
-		}
-	}
-	return false
+func mul(a float64, b float64) float64 {
+	return a*b
 }
 
-func (dict OperationDictImpl) GetPriority(symbol rune) (int, error) {
-	for _, value := range dict.operations {
-		if value.symbol == symbol {
-			return value.priority, nil
-		}
-	}
-
-	return 0, errors.New(string(symbol)+" operation is not allowed")
+func div(a float64, b float64) float64 {
+	return a/b
 }
 
-func (dict OperationDictImpl) GetOperation(symbol rune) (operation, error) {
-	for _, value := range dict.operations {
-		if value.symbol == symbol {
-			return value, nil
-		}
+func pow(a float64, b float64) float64 {
+	var result float64
+	result = 1
+
+	for i := 0; i < int(b); i++ {
+		result *= a
 	}
 
-	return operation{}, errors.New(string(symbol)+" operation is not allowed")
+	return result
+}
+
+func unaryMinus(a float64, _ float64) float64 {
+	return -a
 }
