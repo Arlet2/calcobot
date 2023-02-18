@@ -3,11 +3,13 @@ package internal
 import (
 	"errors"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
 type postfixExpression string
 
+//todo починить!
 func ToPostfix(input string) (postfixExpression, error) {
 	output := ""
 	stack := OperationStackImpl{}
@@ -94,4 +96,55 @@ func ToPostfix(input string) (postfixExpression, error) {
 	output = strings.ReplaceAll(output, ",", ".")
 
 	return postfixExpression(output), nil
+}
+
+func CalculatePostfix(exp postfixExpression) (float64, error) {
+	input := string(exp)
+	stack := NumberStackImpl{}
+	number := ""
+
+	for _, value := range input {
+
+		if '0' <= value && value <= '9' || value == '.' {
+			number += string(value)
+			continue
+		} else if number != "" {
+			parsedNumber, _ := strconv.ParseFloat(number, 64)
+			number = ""
+			stack.Push(parsedNumber)
+		}
+
+		if value == ' ' {
+			continue
+		}
+
+		operation, err := AllowedOperations.GetOperation(value)
+
+		if err != nil {
+			return 0, err
+		} else {
+			b, err := stack.Pop()
+
+			if err != nil {
+				return 0, err
+			}
+
+			if operation.isBinary {
+
+				a, err := stack.Pop()
+
+				if err != nil {
+					return 0, err
+				}
+
+				stack.Push(operation.calc(a, b))
+			} else {
+				stack.Push(operation.calc(b, 0))
+			}
+		}
+	}
+
+	result, err := stack.Pop()
+
+	return result, err
 }
