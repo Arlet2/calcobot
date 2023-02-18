@@ -21,7 +21,7 @@ func ToPostfix(input string) (postfixExpression, error) {
 		/*
 			Конструируем число из цифр
 		*/
-		if '0' <= value && value <= '9' {
+		if ('0' <= value && value <= '9') || value == '.' || value == ',' {
 			number += string(value)
 			continue
 		} else {
@@ -89,6 +89,9 @@ func ToPostfix(input string) (postfixExpression, error) {
 	// очищаем от избыточных пробелов
 	var regex = regexp.MustCompile(`\s{2,}`)
 	output = regex.ReplaceAllString(output, " ")
+
+	// преобразуем , в .
+	output = strings.ReplaceAll(output, ",", ".")
 
 	return postfixExpression(output), nil
 }
