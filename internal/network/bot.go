@@ -16,6 +16,9 @@ type bot struct {
 	isDebug bool
 }
 
+// Create new telegram bot with this token and with mode
+// Returning bot and error
+// Can produce TG API error
 func NewBot(token string, isDebug bool) (bot, error) {
 	botApi, err := tgbotapi.NewBotAPI(token)
 
@@ -50,6 +53,7 @@ func (bot bot) replyToMessage(chatId int64, messageId int, text string) (tgbotap
 	return bot.api.Send(msg)
 }
 
+// Start bot polling with this database
 func (bot bot) StartWorking(db database.Database) {
 	updates := bot.getUpdatesChan()
 
@@ -129,8 +133,9 @@ func (bot bot) StartWorking(db database.Database) {
 	}
 }
 
+// Check that this user input is expression
 func isExpression(input string) bool {
-	regex, _ := regexp.Compile("[a-zA-Zа-яА-Я]+")
+	regex, _ := regexp.Compile("[a-zA-Zа-яА-Я;/\\]+")
 
 	results := regex.FindAllString(input, 1)
 
