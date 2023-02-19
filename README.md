@@ -12,3 +12,6 @@
 Для Telegram API я использовал эту библиотеку github.com/go-telegram-bot-api/telegram-bot-api/v5.
 
 В основном же я использовал стандартные библиотеки на Go.
+
+Пример взятия данных из БД с http сервера
+![image](https://user-images.githubusercontent.com/40723573/219971664-429a3f2e-3502-4fba-ab65-c64dc98f88e3.png)
