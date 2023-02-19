@@ -98,6 +98,8 @@ func ToPostfix(input string) (postfixExpression, error) {
 	return postfixExpression(output), nil
 }
 
+// Calculate postfix expression and return result of the calculation
+// Can produce error "Operation is not allowed" if operation is not implemented in dictionary of allowed operations
 func CalculatePostfix(exp postfixExpression) (float64, error) {
 	input := string(exp)
 	stack := NumberStackImpl{}
