@@ -14,8 +14,8 @@ type httpServer struct{
 }
 
 // Start HTTP server on this path and using this database
-func StartHttpServer(path string, db database.Database) {
-	httpServer := httpServer{db: db, port: 8000}
+func StartHttpServer(path string, port int, db database.Database) {
+	httpServer := httpServer{db: db, port: port}
 
 	http.HandleFunc(path, httpServer.handler)
 
