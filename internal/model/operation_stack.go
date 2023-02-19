@@ -18,6 +18,7 @@ type OperationStackImpl struct {
 	array []operation
 }
 
+// Print all elements from the stack.
 func (stack OperationStackImpl) Print() {
 	if stack.IsEmpty() {
 		fmt.Println("EMPTY!")
@@ -29,6 +30,7 @@ func (stack OperationStackImpl) Print() {
 	fmt.Println("bottom...")
 }
 
+// Add some operation to top of the stack.
 func (stack *OperationStackImpl) Push(value operation) {
 	newArray := make([]operation, 0)
 
@@ -38,6 +40,8 @@ func (stack *OperationStackImpl) Push(value operation) {
 	stack.array = newArray
 }
 
+// Get some operation from top of the stack and remove it from the stack.
+// Can produce error "Stack is empty" if stack is empty and you cannot get any element.
 func (stack *OperationStackImpl) Pop() (operation, error) {
 	if stack.IsEmpty() {
 		return operation{}, errors.New("stack is empty")
@@ -49,6 +53,8 @@ func (stack *OperationStackImpl) Pop() (operation, error) {
 	return value, nil
 }
 
+// Get some operation from top of the stack and DON'T remove it from the stack.
+// Can produce error "Stack is empty" if stack is empty and you cannot get any element.
 func (stack *OperationStackImpl) Peek() (operation, error) {
 	if stack.IsEmpty() {
 		return operation{}, errors.New("stack is empty")
@@ -57,14 +63,19 @@ func (stack *OperationStackImpl) Peek() (operation, error) {
 	return stack.array[0], nil
 }
 
+// Check is the stack is empty.
+// Return true if stack hasn't got any element, otherwise true.
 func (stack *OperationStackImpl) IsEmpty() bool {
 	return len(stack.array) == 0 
 }
 
+// Remove all elements from the stack.
 func (stack *OperationStackImpl) Clear() {
 	stack.array = make([]operation, 0)
 }
 
+// Get all elements from the stack and clear the stack.
+// Can produce error "Stack is empty" if stack is empty and you cannot get any element.
 func (stack *OperationStackImpl) PopAll() ([]operation, error) {
 	if stack.IsEmpty() {
 		return []operation{}, errors.New("stack is empty")
