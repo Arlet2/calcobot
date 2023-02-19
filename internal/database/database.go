@@ -17,6 +17,7 @@ type Log struct {
 type Database interface {
 	Close()
 	AddLog(log Log)
+	GetLogsByUsername(username string) ([]Log, error)
 }
 
 type postgresDatabase struct{
