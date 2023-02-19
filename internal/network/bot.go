@@ -136,7 +136,7 @@ func (bot bot) StartWorking(db database.Database) {
 
 // Check that this user input is expression
 func isExpression(input string) bool {
-	regex, _ := regexp.Compile(`[a-zA-Zа-яА-Я;/\\]+`)
+	regex, _ := regexp.Compile(`[a-zA-Zа-яА-Я;\\]+`)
 
 	results := regex.FindAllString(input, 1)
 
