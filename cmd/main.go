@@ -15,7 +15,7 @@ func main() {
 	}
 	defer db.Close()
 
-	bot, err := network.NewBot(os.Getenv("BOT_TOKEN"), true)
+	bot, err := network.NewBot(os.Getenv("BOT_TOKEN"), false)
 
 	if err != nil {
 		fmt.Println("Found error: "+err.Error())
