@@ -21,6 +21,6 @@ func main() {
 		fmt.Println("Found error: "+err.Error())
 		return
 	}
-	go network.StartHttpServer("/calcobot", 13000, db)
+	go network.StartHttpServer("/calcobot", 9900, db)
 	bot.StartWorking(db)
 }
