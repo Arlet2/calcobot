@@ -1,4 +1,4 @@
-package internal
+package model
 
 var AllowedOperations = OperationDictImpl{
 	[]operation{
