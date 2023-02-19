@@ -13,6 +13,7 @@ type httpServer struct{
 	port int
 }
 
+// Start HTTP server on this path and using this database
 func StartHttpServer(path string, db database.Database) {
 	httpServer := httpServer{db: db, port: 8000}
 
