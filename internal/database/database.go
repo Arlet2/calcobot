@@ -15,7 +15,7 @@ type Log struct {
 
 type Database interface {
 	Close()
-	AddLog()
+	AddLog(log Log)
 }
 
 type postgresDatabase struct{
