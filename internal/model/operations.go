@@ -53,6 +53,10 @@ func unaryMinus(a float64, _ float64) float64 {
 
 // добавить многопоточку
 func factorial(a float64, _ float64) float64 {
+	if a == 0 || a == 1 {
+		return 1
+	}
+
 	result := 2
 	for i := 3; i <= int(a); i++ {
 		result *= i
