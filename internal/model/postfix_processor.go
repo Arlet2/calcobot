@@ -54,7 +54,7 @@ func ToPostfix(input string) (postfixExpression, error) {
 
 		} else if AllowedOperations.IsOnDict(value) {
 			/*
-				Если операция допускается, то выталкиваем все операции с бОльшим приоритетом
+				Если операция допускается, то выталкиваем все операции с бОльшим либо равным приоритетом
 			*/
 			operation, err := AllowedOperations.GetOperation(value)
 
