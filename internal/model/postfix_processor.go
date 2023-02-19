@@ -77,6 +77,8 @@ func ToPostfix(input string) (postfixExpression, error) {
 			}
 
 			stack.Push(addedOperation)
+		} else {
+			return "", errors.New(string(value)+" operation is not allowed")
 		}
 	}
 	output += number + " "
