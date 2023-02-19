@@ -10,6 +10,8 @@ import (
 type postfixExpression string
 
 //todo починить!
+// Convert user input string to postfix expression
+// Can produce error "Operation is not allowed" if operation doesn't support for this converter
 func ToPostfix(input string) (postfixExpression, error) {
 	output := ""
 	stack := OperationStackImpl{}
