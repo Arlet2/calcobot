@@ -12,8 +12,8 @@ type OperationDictImpl struct{
 	operations []operation
 }
 
-// Check existing of operation in allowed operations
-// Return true if operation exists in dictionary, otherwase false
+// Check existing of operation in allowed operations.
+// Return true if operation exists in dictionary, otherwise false.
 func (dict OperationDictImpl) IsOnDict(symbol rune) bool {
 	for _, value := range dict.operations {
 		if value.symbol == symbol {
@@ -24,7 +24,7 @@ func (dict OperationDictImpl) IsOnDict(symbol rune) bool {
 }
 
 // Get priority of some operation by symbol (char).
-// Can produce error "Operation is not allowed"
+// Can produce error "Operation is not allowed" if this operation does not implemented.
 func (dict OperationDictImpl) GetPriority(symbol rune) (int, error) {
 	for _, value := range dict.operations {
 		if value.symbol == symbol {
@@ -36,7 +36,7 @@ func (dict OperationDictImpl) GetPriority(symbol rune) (int, error) {
 }
 
 // Get operation object by symbol (char).
-// Can produce error "Operation is not allowed".
+// Can produce error "Operation is not allowed" if this operation does not implemented.
 func (dict OperationDictImpl) GetOperation(symbol rune) (operation, error) {
 	for _, value := range dict.operations {
 		if value.symbol == symbol {
