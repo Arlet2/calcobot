@@ -9,7 +9,6 @@ import (
 
 type postfixExpression string
 
-//todo починить! скобки
 // Convert user input string to postfix expression
 // Can produce error "Operation is not allowed" if operation doesn't support for this converter
 func ToPostfix(input string) (postfixExpression, error) {
@@ -64,7 +63,7 @@ func ToPostfix(input string) (postfixExpression, error) {
 
 			addedOperation := operation
 
-			if !stack.IsEmpty() {
+			if !stack.IsEmpty() && value != '(' {
 				operation, err = stack.Peek()
 
 				for operation.priority >= addedOperation.priority {
