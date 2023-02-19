@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"time"
+	_ "github.com/lib/pq"
 )
 
 type Log struct {
