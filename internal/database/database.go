@@ -19,7 +19,7 @@ type Database interface {
 }
 
 type postgresDatabase struct{
-	*sql.DB
+	wrappee *sql.DB
 }
 
 func NewPostgresDatabase(user string, password string, dbname string, sslmodeEnable bool) (postgresDatabase, error) {
@@ -43,7 +43,7 @@ func NewPostgresDatabase(user string, password string, dbname string, sslmodeEna
 }
 
 func (db postgresDatabase) createLogTableIfNotExists() {
-	_, err := db.Exec(`CREATE TABLE IF NOT EXISTS calco_logs(
+	_, err := db.wrappee.Exec(`CREATE TABLE IF NOT EXISTS calco_logs(
 						id SERIAL PRIMARY KEY,
 						time TIMESTAMP,
 						username TEXT,
@@ -56,11 +56,11 @@ func (db postgresDatabase) createLogTableIfNotExists() {
 }
 
 func (db postgresDatabase) Close() {
-	db.DB.Close()
+	db.wrappee.Close()
 }
 
 func (db postgresDatabase) AddLog(log Log) {
-	_, err := db.Exec(`INSERT INTO calco_logs 
+	_, err := db.wrappee.Exec(`INSERT INTO calco_logs 
 				VALUES(NEXTVAL('calco_logs_id_seq'), $1, $2, $3, $4)`, 
 						log.Time, log.Username, log.Request, log.Answer)
 
@@ -70,7 +70,7 @@ func (db postgresDatabase) AddLog(log Log) {
 }
 
 func (db postgresDatabase) GetLogsByUsername(username string) ([]Log, error) {
-	rows, err := db.Query("SELECT * FROM calco_logs WHERE username=$1", username)
+	rows, err := db.wrappee.Query("SELECT * FROM calco_logs WHERE username=$1", username)
 
 	if err != nil {
 		return nil, err
