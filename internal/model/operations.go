@@ -51,7 +51,6 @@ func unaryMinus(a float64, _ float64) float64 {
 	return -a
 }
 
-// добавить многопоточку
 func factorial(a float64, _ float64) float64 {
 	if a == 0 || a == 1 {
 		return 1
