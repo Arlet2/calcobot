@@ -95,6 +95,8 @@ func ToPostfix(input string) (postfixExpression, error) {
 	// преобразуем , в .
 	output = strings.ReplaceAll(output, ",", ".")
 
+	output = strings.TrimSpace(output)
+
 	return postfixExpression(output), nil
 }
 
