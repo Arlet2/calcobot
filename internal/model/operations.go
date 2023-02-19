@@ -9,6 +9,7 @@ var AllowedOperations = OperationDictImpl{
 		{'/', 2, true, div},
 		{'^', 3, true, pow},
 		{'~', 4, false, unaryMinus}, // унарный минус
+		{'!', 4, false, factorial}, // факториал
 	},
 }
 
@@ -48,4 +49,14 @@ func pow(a float64, b float64) float64 {
 
 func unaryMinus(a float64, _ float64) float64 {
 	return -a
+}
+
+// добавить многопоточку
+func factorial(a float64, _ float64) float64 {
+	result := 2
+	for i := 3; i <= int(a); i++ {
+		result *= i
+	}
+
+	return float64(result)
 }
