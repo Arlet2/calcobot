@@ -15,6 +15,7 @@
 
 Пример взятия данных из БД с http сервера
 ![image](https://user-images.githubusercontent.com/40723573/219971664-429a3f2e-3502-4fba-ab65-c64dc98f88e3.png)
+
 Можно попробовать сделать самому: http://arlet.space:9900/calcobot?username=shulga02
 
 Во время разработки столкнулся со следующими проблемами:
