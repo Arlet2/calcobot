@@ -20,7 +20,7 @@ func StartHttpServer(path string, port int, db database.Database) {
 	http.HandleFunc(path, httpServer.handler)
 
 	fmt.Println("Http server is working")
-	log.Fatal(http.ListenAndServe("localhost:"+strconv.FormatInt(int64(httpServer.port), 10), nil))
+	log.Fatal(http.ListenAndServe(":"+strconv.FormatInt(int64(httpServer.port), 10), nil))
 }
 
 func (httpServer httpServer) handler(writer http.ResponseWriter, req *http.Request) {
