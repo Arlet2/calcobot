@@ -117,6 +117,9 @@ func CalculatePostfix(exp postfixExpression) (float64, error) {
 			number += string(value)
 			continue
 		} else if number != "" {
+			if len(number) > 307 {
+				return 0, errors.New("одно из чисел слишком большое")
+			}
 			parsedNumber, _ := strconv.ParseFloat(number, 64)
 			number = ""
 			stack.Push(parsedNumber)
