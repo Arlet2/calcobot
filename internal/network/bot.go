@@ -3,6 +3,7 @@ package network
 import (
 	"calcobot/internal/database"
 	"calcobot/internal/model"
+	"errors"
 	"fmt"
 	"regexp"
 	"strconv"
@@ -113,6 +114,9 @@ func (bot bot) StartWorking(db database.Database) {
 			answer, err := model.CalculatePostfix(postfixExpression)
 
 			if err != nil {
+				if err.Error() == "stack is empty" {
+					err = errors.New("что-то не так с исходным выражением (возможно вы использовали - вместо ~, либо у вас отсутствуют операторы в выражении)")
+				}
 				bot.replyToMessage(request.ChatID, update.Message.MessageID, "Ошибка: "+err.Error())
 
 				if err != nil {
