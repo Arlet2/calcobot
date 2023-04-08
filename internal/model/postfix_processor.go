@@ -12,8 +12,8 @@ type postfixExpression string
 // Convert user input string to postfix expression
 // Can produce error "Operation is not allowed" if operation doesn't support for this converter
 func ToPostfix(input string) (postfixExpression, error) {
+	var stack Stack[operation] = &OperationStack{} 
 	output := ""
-	stack := OperationStackImpl{}
 	number := ""
 
 	// очищаем от пробелов
@@ -106,8 +106,9 @@ func ToPostfix(input string) (postfixExpression, error) {
 // Calculate postfix expression and return result of the calculation
 // Can produce error "Operation is not allowed" if operation is not implemented in dictionary of allowed operations
 func CalculatePostfix(exp postfixExpression) (float64, error) {
+	var stack Stack[float64] = &NumberStack{}
+
 	input := string(exp)
-	stack := NumberStackImpl{}
 	number := ""
 
 	for _, value := range input {
