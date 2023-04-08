@@ -36,30 +36,36 @@ func div(a float64, b float64) float64 {
 	return a/b
 }
 
-func pow(a float64, b float64) float64 {
-	var result float64
+func pow(a float64, b float64) (result float64) {
 	result = 1
 
-	for i := 0; i < int(b); i++ {
-		result *= a
+	if b > 0 {
+		for i := 0; i < int(b); i++ {
+			result *= a
+		}
+	} else if b < 0{
+		for i := 0; i < -int(b); i++ {
+			result /= a
+		}
 	}
 
-	return result
+	return
 }
 
 func unaryMinus(a float64, _ float64) float64 {
 	return -a
 }
 
-func factorial(a float64, _ float64) float64 {
+func factorial(a float64, _ float64) (value float64) {
 	if a == 0 || a == 1 {
-		return 1
+		value = 1
+	} else if a > 34 {
+		value = -1
+	} else {
+		value = 2
+		for i := 3; i <= int(a); i++ {
+			value *= float64(i)
+		}
 	}
-
-	result := 2
-	for i := 3; i <= int(a); i++ {
-		result *= i
-	}
-
-	return float64(result)
+	return
 }
