@@ -113,7 +113,7 @@ func (bot bot) StartWorking(db database.Database) {
 			answer, err := model.CalculatePostfix(postfixExpression)
 
 			if err != nil {
-				bot.replyToMessage(request.ChatID, update.Message.MessageID, "Я не смог посчитать ваш пример. Обратитесь к создателю")
+				bot.replyToMessage(request.ChatID, update.Message.MessageID, "Ошибка: "+err.Error())
 
 				if err != nil {
 					fmt.Println(err)
