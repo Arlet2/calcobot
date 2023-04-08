@@ -1,4 +1,3 @@
-cd bin
-GOARCH=386 go build -o calcobot32 ../cmd/main.go
-go build -o calcobot ../cmd/main.go
-GOARCH=amd64 GOOS=windows go build -o calcobot.exe ../cmd/main.go
+GOARCH=386      GOOS=linux      go build -o bin/calcobot32      cmd/main.go
+GOARCH=amd64    GOOS=linux      go build -o bin/calcobot        cmd/main.go
+GOARCH=amd64    GOOS=windows    go build -o bin/calcobot.exe    cmd/main.go
